@@ -1,0 +1,20 @@
+# <% require "dotenv"; Dotenv.load(".env") %>
+
+service: demo-python-fastapi
+image: gambala/demo-python-fastapi
+servers:
+  - <%= ENV["MAIN_SERVER_IP"] %>
+proxy:
+  ssl: false
+  host: fastapi.gambala.pro
+  app_port: 80
+  healthcheck:
+    interval: 10
+    path: /
+registry:
+  server: ghcr.io
+  username: gambala
+  password:
+    - KAMAL_REGISTRY_PASSWORD
+builder:
+  arch: arm64
